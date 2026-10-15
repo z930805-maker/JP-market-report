@@ -127,6 +127,11 @@
     table{font-size:11.5px}
     th,td{padding:7px 5px}
   }
+
+  .site-nav { max-width: 820px; margin: 16px 0 24px; display: flex; gap: 16px; font-size: 13px; }
+  .site-nav a { color: var(--ink, #1C2540); text-decoration: none; font-weight: 700; padding: 6px 14px; background: var(--paper, #FFFFFF); border: 1px solid var(--line, #D9DDE6); border-radius: 4px; }
+  .site-nav a:hover { background: var(--wash, #F3F5F9); }
+  .site-nav a.active { background: var(--ink, #1C2540); color: var(--paper, #FFFFFF); }
 </style>
 </head>
 <body>
@@ -142,6 +147,8 @@
     <div class="w">星期三　資料更新 16:44</div>
   </div>
 </header>
+<nav class="site-nav"><a href="../index.html">最新報表</a><a href="../history.html">歷史報表</a></nav>
+
 
 <h2>大盤與匯率</h2>
 <div class="strip">
