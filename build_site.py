@@ -11,7 +11,7 @@ import os
 
 SITE_DIR = os.path.dirname(os.path.abspath(__file__))
 # 預設使用 reports 資料夾存放每日報表
-REPORTS_DIR = os.path.join(SITE_DIR, "reports")
+REPORTS_DIR = os.path.join(SITE_DIR, "JP_reports")
 
 # 配合新版 HTML 變數風格的導覽列 CSS
 NAV_CSS = """
@@ -82,7 +82,7 @@ def main():
     # 3) 產生 history.html（限制近 30 期）
     dated_files_desc = list(reversed(dated_files))[:30]
     list_items = "\n".join(
-        f'        <li><a href="reports/{os.path.basename(f)}">{d.replace("-", "/")} 觀光業看盤日報</a></li>'
+       f'        <li><a href="JP_reports/{os.path.basename(f)}">{d.replace("-", "/")} 觀光業看盤日報</a></li>'
         for d, f in dated_files_desc
     )
     
