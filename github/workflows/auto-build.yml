@@ -1,1 +1,28 @@
+name: Auto Build Site
 
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 取得最新程式碼
+        uses: actions/checkout@v4
+
+      - name: 設定 Python 環境
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 執行更新腳本
+        run: python build_site.py
+
+      - name: 自動存檔與更新 (Auto Commit)
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "自動更新：透過 GitHub Actions 執行 build_site.py"
