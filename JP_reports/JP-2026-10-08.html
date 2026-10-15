@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>日股觀光業看盤日報｜2026/10/08</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1C2540;
+    --ink-soft:#4A5370;
+    --muted:#7E869C;
+    --line:#D9DDE6;
+    --wash:#F3F5F9;
+    --paper:#FFFFFF;
+    --up:#C8102E;
+    --up-wash:#FBE7EA;
+    --down:#12804A;
+    --down-wash:#E3F3EA;
+    --bench:#1C2540;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--paper);color:var(--ink)}
+  body{
+    font-family:"Noto Sans TC","Noto Sans CJK TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    font-size:14px;line-height:1.65;
+    font-variant-numeric:tabular-nums;
+  }
+  .page{max-width:820px;margin:0 auto;padding:36px 32px 28px}
+
+  /* Header */
+  header{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;
+         border-bottom:3px solid var(--ink);padding-bottom:14px}
+  h1{margin:0;font-size:26px;font-weight:900;letter-spacing:.02em}
+  .sub{margin:4px 0 0;color:var(--ink-soft);font-size:13px}
+  .date{text-align:right;line-height:1.1}
+  .date .d{font-size:40px;font-weight:900;letter-spacing:-.01em}
+  .date .w{font-size:13px;color:var(--ink-soft);margin-top:6px}
+
+  h2{font-size:16px;font-weight:700;margin:28px 0 10px;padding-left:10px;border-left:4px solid var(--ink)}
+
+  /* Market strip */
+  .strip{display:grid;grid-template-columns:repeat(4,1fr);background:var(--wash);border-radius:6px}
+  .strip > div{padding:12px 14px;border-left:1px solid var(--line)}
+  .strip > div:first-child{border-left:0}
+  .strip .n{font-size:12px;color:var(--ink-soft)}
+  .strip .v{font-size:20px;font-weight:700;margin:2px 0}
+  .strip .c{font-size:12.5px;font-weight:500}
+
+  .up{color:var(--up)} .down{color:var(--down)} .flat{color:var(--muted)}
+
+  /* Diverging chart */
+  .chart{border:1px solid var(--line);border-radius:6px;padding:14px 16px 10px}
+  .chart-note{font-size:12px;color:var(--ink-soft);margin:0 0 10px}
+  .row{display:grid;grid-template-columns:150px 1fr 64px;align-items:center;gap:10px;height:30px}
+  .row .lbl{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .row .lbl small{color:var(--muted);margin-left:4px}
+  .track{position:relative;height:16px}
+  .track .zero{position:absolute;top:-7px;bottom:-7px;left:63.636%;width:1px;background:var(--muted)}
+  .bar{position:absolute;top:2px;height:12px;border-radius:2px}
+  .bar.up{background:var(--up)} .bar.down{background:var(--down)}
+  .bench{position:absolute;top:-6px;bottom:-6px;width:0;border-left:2px dashed var(--bench)}
+  .row .pct{text-align:right;font-weight:700;font-size:13px}
+  .axis{display:grid;grid-template-columns:150px 1fr 64px;gap:10px;margin-top:4px}
+  .axis .ticks{position:relative;height:16px;font-size:11px;color:var(--muted)}
+  .axis .ticks span{position:absolute;transform:translateX(-50%)}
+  .legend{display:flex;gap:18px;font-size:12px;color:var(--ink-soft);margin-top:6px;flex-wrap:wrap}
+  .legend i{display:inline-block;width:16px;vertical-align:middle;margin-right:6px}
+  .legend .lb{border-top:2px dashed var(--bench)}
+
+  /* Table */
+  .tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{padding:8px 8px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+  th{font-weight:500;color:var(--ink-soft);font-size:12px;background:var(--wash)}
+  th:first-child,td:first-child{text-align:left}
+  td:first-child b{font-weight:700}
+  td:first-child small{color:var(--muted);margin-left:4px}
+  tr.hk td{background:#FAFBFD}
+  td.chg-up{color:var(--up);font-weight:700}
+  td.chg-down{color:var(--down);font-weight:700}
+  td.chg-flat{color:var(--muted);font-weight:700}
+  /* column toggle — hidden on desktop & print, shown only on narrow screens */
+  .col-toggle{display:none}
+
+  /* Summary */
+  .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin:0 0 14px;border:1px solid var(--line);border-radius:6px}
+  .kpis > div{padding:10px 14px;border-left:1px solid var(--line)}
+  .kpis > div:first-child{border-left:0}
+  .kpis .n{font-size:12px;color:var(--ink-soft)}
+  .kpis .v{font-size:18px;font-weight:700}
+
+  .points p{margin:0 0 10px;padding-left:14px;border-left:2px solid var(--line);max-width:72ch}
+  .points p b{color:var(--ink)}
+
+  footer{margin-top:24px;padding-top:12px;border-top:1px solid var(--line);font-size:11.5px;color:var(--muted)}
+  footer p{margin:0 0 4px}
+  footer .warn{color:var(--up)}
+
+  @media (max-width:640px){
+    .page{padding:24px 16px}
+    header{flex-direction:column;align-items:flex-start}
+    .date{text-align:left}
+    .strip,.kpis{grid-template-columns:repeat(2,1fr)}
+    .strip > div:nth-child(3){border-left:0}
+    .row,.axis{grid-template-columns:96px 1fr 52px}
+    /* company column stays fixed while swiping */
+    th:first-child,td:first-child{position:sticky;left:0;z-index:1}
+    th:first-child{background:var(--wash)}
+    td:first-child{background:var(--paper)}
+    tr.hk td:first-child{background:#FAFBFD}
+    /* hide secondary columns by default; toggle reveals them */
+    .col-ext{display:none}
+    body.show-all .col-ext{display:table-cell}
+    .col-toggle{display:block;text-align:right;margin:4px 0 0}
+    .col-toggle button{font-size:12px;border:1px solid var(--line);background:var(--wash);
+      color:var(--ink-soft);padding:5px 12px;border-radius:5px;cursor:pointer}
+  }
+  @page{size:A4;margin:12mm 12mm 12mm}
+  @media print{
+    .page{max-width:none;padding:0}
+    h2{break-after:avoid}
+    .chart,table,.kpis,.points p{break-inside:avoid}
+    .col-ext{display:table-cell!important}
+    .col-toggle{display:none!important}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <div>
+    <h1>日股觀光業看盤日報</h1>
+    <p class="sub">日本旅遊產業鏈上市公司＋港股概念股　收盤彙整</p>
+  </div>
+  <div class="date">
+    <div class="d">2026/10/08</div>
+    <div class="w">星期四　資料更新 16:33</div>
+  </div>
+</header>
+
+<h2>大盤與匯率</h2>
+<div class="strip">
+  <div><div class="n">日經225</div><div class="v">69,042.11</div><div class="c down">▼ 993.60（−1.42%）</div></div>
+  <div><div class="n">香港恒生</div><div class="v">23,785.79</div><div class="c down">▼ 344.71（−1.43%）</div></div>
+  <div><div class="n">USD/JPY</div><div class="v">158.195</div><div class="c up">▲ 0.155（+0.10%）</div></div>
+  <div><div class="n">JPY/TWD</div><div class="v">0.1994</div><div class="c up">▲ 0.0001（+0.05%）</div></div>
+</div>
+
+<h2>個股漲跌 vs 大盤</h2>
+<div class="chart">
+  <p class="chart-note">虛線為各股對應大盤的漲幅（日股對日經225、港股對恒生）。長條落在虛線右側即代表當日跑贏大盤。途屹控股今日無成交，數值為 10/07 最後成交價。</p>
+
+  <!-- scale: -2% at 0%, 0 at 50%, +2% at 100% → 25% per 1 pt -->
+  <div class="row"><div class="lbl">KNT<small>9726</small></div>
+    <div class="track"><div class="zero"></div><div class="bar up" style="left:50.000%;width:35.250%"></div><div class="bench" style="left:14.500%"></div></div>
+    <div class="pct up">+1.41%</div></div>
+  <div class="row"><div class="lbl">HIS<small>9603</small></div>
+    <div class="track"><div class="zero"></div><div class="bar up" style="left:50.000%;width:23.750%"></div><div class="bench" style="left:14.500%"></div></div>
+    <div class="pct up">+0.95%</div></div>
+  <div class="row"><div class="lbl">Hana Tour<small>6561</small></div>
+    <div class="track"><div class="zero"></div><div class="bar up" style="left:50.000%;width:3.000%"></div><div class="bench" style="left:14.500%"></div></div>
+    <div class="pct up">+0.12%</div></div>
+  <div class="row"><div class="lbl">VELTRA<small>7048</small></div>
+    <div class="track"><div class="zero"></div><div class="bar down" style="left:32.000%;width:18.000%"></div><div class="bench" style="left:14.500%"></div></div>
+    <div class="pct down">−0.72%</div></div>
+  <div class="row"><div class="lbl">AirTrip<small>6191</small></div>
+    <div class="track"><div class="zero"></div><div class="bar down" style="left:28.750%;width:21.250%"></div><div class="bench" style="left:14.500%"></div></div>
+    <div class="pct down">−0.85%</div></div>
+  <div class="row"><div class="lbl">途屹控股<small>1701.HK ·10/07</small></div>
+    <div class="track"><div class="zero"></div><div class="bar up" style="left:50.000%;width:38.000%;opacity:.45"></div><div class="bench" style="left:34.500%"></div></div>
+    <div class="pct up">+1.52%</div></div>
+
+  <div class="axis"><div></div>
+    <div class="ticks"><span style="left:0%">−2%</span><span style="left:25%">−1%</span><span style="left:50%">0</span><span style="left:75%">+1%</span><span style="left:100%">+2%</span></div>
+  <div></div></div>
+  <div class="legend">
+    <span><i class="lb"></i>日經225 −1.42%／恒生（10/07）−0.62%</span>
+    <span><i style="height:10px;background:var(--up)"></i>上漲</span>
+    <span><i style="height:10px;background:var(--down)"></i>下跌</span>
+  </div>
+</div>
+
+<h2>個股行情</h2>
+<div class="col-toggle"><button onclick="document.body.classList.toggle('show-all');this.textContent=document.body.classList.contains('show-all')?'精簡欄位':'顯示完整欄位'">顯示完整欄位</button></div>
+<div class="tbl-wrap">
+<table>
+  <thead><tr>
+    <th>公司</th><th>收盤</th><th class="col-ext">漲跌</th><th>漲幅</th><th class="col-ext">最高</th><th class="col-ext">最低</th><th class="col-ext">成交量(股)</th><th class="col-ext">市值(億)</th><th class="col-ext">預估EPS</th><th>預估PE</th>
+  </tr></thead>
+  <tbody>
+    <tr><td><b>HIS</b><small>9603</small></td><td>¥1,059</td><td class="col-ext chg-up">+10</td><td class="chg-up">+0.95%</td><td class="col-ext">1,068</td><td class="col-ext">1,039</td><td class="col-ext">474,400</td><td class="col-ext">¥845.73</td><td class="col-ext">60.5</td><td>17.50</td></tr>
+    <tr><td><b>KNT</b><small>9726</small></td><td>¥2,019</td><td class="col-ext chg-up">+28</td><td class="chg-up">+1.41%</td><td class="col-ext">2,034</td><td class="col-ext">1,966</td><td class="col-ext">36,000</td><td class="col-ext">¥551.81</td><td class="col-ext">280</td><td>7.21</td></tr>
+    <tr><td><b>AirTrip</b><small>6191</small></td><td>¥1,404</td><td class="col-ext chg-down">−12</td><td class="chg-down">−0.85%</td><td class="col-ext">1,429</td><td class="col-ext">1,383</td><td class="col-ext">284,200</td><td class="col-ext">¥319.72</td><td class="col-ext">105</td><td>13.37</td></tr>
+    <tr><td><b>VELTRA</b><small>7048</small></td><td>¥138</td><td class="col-ext chg-down">−1</td><td class="chg-down">−0.72%</td><td class="col-ext">140</td><td class="col-ext">136</td><td class="col-ext">168,800</td><td class="col-ext">¥50.51</td><td class="col-ext">2.5</td><td>55.20</td></tr>
+    <tr><td><b>Hana Tour Japan</b><small>6561</small></td><td>¥820</td><td class="col-ext chg-up">+1</td><td class="chg-up">+0.12%</td><td class="col-ext">826</td><td class="col-ext">810</td><td class="col-ext">7,200</td><td class="col-ext">¥103.84</td><td class="col-ext">45</td><td>18.22</td></tr>
+    <tr class="hk"><td><b>途屹控股</b><small>1701.HK ·10/07</small></td><td>HK$0.067</td><td class="col-ext chg-up">+0.001</td><td class="chg-up">+1.52%</td><td class="col-ext">0.067</td><td class="col-ext">0.067</td><td class="col-ext">8,000</td><td class="col-ext">HK$0.67</td><td class="col-ext">0.013</td><td>5.15</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2>今日重點</h2>
+<div class="kpis">
+  <div><div class="n">日股觀光五檔市值加權</div><div class="v up">+0.69%</div></div>
+  <div><div class="n">相對日經225</div><div class="v up">+2.11 pt</div></div>
+  <div><div class="n">上漲／平盤／下跌</div><div class="v">3／0／2</div></div>
+</div>
+<div class="points">
+  <p><b>類股逆勢上漲、顯著跑贏大盤。</b>日經重挫 1.42%（跌 993.6 點）、恒生亦跌 1.43%，為明顯的全面避險日；但日本旅遊鏈五檔有三檔收紅，市值加權合計 +0.69%（總市值約 ¥1,872 億），反向領先大盤約 2.11 個百分點，一舉扭轉前兩日連續跑輸的態勢。</p>
+  <p><b>KNT 領漲 +1.41%。</b>收 ¥2,019 貼近日高 ¥2,034，為日股五檔漲幅最大；成交放大至 3.6 萬股（昨日 1.57 萬股），且預估 PE 僅 7.21 倍為群組最低，估值與動能兼具。</p>
+  <p><b>HIS 成交金額居冠約 ¥5.02 億。</b>成交 47.4 萬股為日股五檔最大量，收 ¥1,059 漲 0.95%、收在日高 ¥1,068 附近，龍頭股買盤回籠。</p>
+  <p><b>僅 AirTrip、VELTRA 小跌。</b>AirTrip 跌幅最深但僅 −0.85%（收 ¥1,404），VELTRA −0.72%（收 ¥138）；兩檔跌幅皆明顯小於大盤，等同相對抗跌。</p>
+  <p><b>途屹控股今日無成交。</b>恒生指數今日有更新（港股有交易），但途屹為極低流動性仙股、全日無成交，股價停在 10/07 最後成交價 HK$0.067，不納入今日漲跌比較。</p>
+  <p><b>匯率面：</b>日圓微貶、USD/JPY 升至 158.195（+0.10%），續處 158 弱勢區間，對入境（inbound）消費有利；日圓兌台幣幾乎持平（100 日圓＝19.94 台幣，+0.05%）。弱日圓題材可能是觀光股今日逆勢抗跌的支撐之一。</p>
+  <p><b>估值觀察：</b>KNT 預估 PE 7.21 倍為群組最低；VELTRA 55.20 倍最高，反映 EPS 預估僅 ¥2.5 的低獲利基期。</p>
+</div>
+
+<footer>
+  <p>資料來源：Google Sheet「日本旅遊產業鏈上市公司股價資訊」（StockData、統計），系統更新時間 2026-10-08 16:33:08。Yahoo Finance 資料可能有約 20 分鐘延遲。</p>
+  <p class="warn">⚠ 恒生指數昨收仍落後一日：原表以 10/6 收盤 24,280.56 當昨收（顯示漲跌 −494.81／−2.04%），實際昨收應為 10/7 收盤 24,130.50，本報採修正值 −344.71（−1.43%）。此為連續第三日同一問題，建議盡速修正 Apps Script 昨收取值邏輯（應取「前一實際交易日」收盤）。</p>
+  <p>⚠ 途屹控股（1701.HK）資料日期為 10/07：港股今日有交易（恒生指數已更新），惟該股全日無成交，顯示 10/07 最後成交價，未納入今日漲跌家數與市值加權計算。</p>
+  <p>EPS 為本期預估值，發行股數為手動輸入。本報告僅供內部參考，不構成投資建議。</p>
+</footer>
+
+</div>
+</body>
+</html>
