@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>日股觀光業看盤日報 2026/10/16</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ffffff; --panel:#ffffff; --ink:#1C2540; --ink2:#55607a; --muted:#8a92a6;
+    --line:#dfe3ea; --thbg:#eef1f5; --hd:#1C2540; --up:#C8102E; --dn:#12804A; --fl:#8b6914;
+    --badge-jp:#1f5fa8; --badge-hk:#12804A;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{background:var(--bg)}
+  body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;color:var(--ink);
+    background:var(--bg);line-height:1.55;padding:30px 22px;font-variant-numeric:tabular-nums}
+  .wrap{max-width:1040px;margin:0 auto}
+  .mono{font-family:"JetBrains Mono","Noto Sans TC",monospace}
+
+  header{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:6px;
+    border-bottom:3px solid var(--ink);padding-bottom:12px;margin-bottom:20px}
+  header h1{font-size:23px;font-weight:900;letter-spacing:.02em}
+  header .sub{font-size:12px;color:var(--ink2);margin-top:3px}
+  header .date{text-align:right;font-size:14px;font-weight:700;color:var(--ink)}
+  header .date small{display:block;font-size:11px;font-weight:400;color:var(--ink2);margin-top:3px}
+
+  .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
+  .kpi-card{background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:12px 14px}
+  .kpi-card .label{font-size:12px;color:var(--ink2);margin-bottom:5px}
+  .kpi-card .value{font-family:"JetBrains Mono",monospace;font-size:20px;font-weight:700;letter-spacing:-.01em}
+  .kpi-card .sub{font-family:"JetBrains Mono",monospace;font-size:12.5px;font-weight:500;margin-top:2px}
+
+  .highlights{background:#fafbfc;border:1px solid var(--line);border-radius:5px;padding:15px 18px;margin-bottom:26px}
+  .highlights h2{font-size:13px;font-weight:700;color:var(--ink);letter-spacing:.08em;margin-bottom:9px}
+  .highlights ul{list-style:none}
+  .highlights li{font-size:13.5px;line-height:1.85;padding-left:18px;position:relative}
+  .highlights li::before{content:"■";color:var(--up);position:absolute;left:0;font-size:9px;top:6px}
+  .highlights b{color:var(--up);font-family:"JetBrains Mono",monospace}
+  .highlights em{color:var(--dn);font-style:normal;font-family:"JetBrains Mono",monospace}
+
+  .group{margin-bottom:22px}
+  .group-head{background:var(--hd);color:#fff;padding:8px 14px;display:flex;justify-content:space-between;
+    align-items:center;font-size:14px;font-weight:700;letter-spacing:.04em;border-radius:4px 4px 0 0}
+  .group-head .unit{font-size:11px;font-weight:400;opacity:.8;margin-left:8px}
+  .group-head .badge{background:rgba(255,255,255,.18);padding:2px 10px;border-radius:10px;font-size:12px;font-weight:400}
+
+  .tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  table{width:100%;border-collapse:collapse;background:var(--panel)}
+  thead th{background:var(--thbg);font-size:11.5px;color:var(--ink2);padding:8px 6px;
+    border-bottom:1px solid var(--line);font-weight:500;text-align:center;white-space:nowrap}
+  tbody td{font-size:13px;padding:7px 6px;text-align:center;border-bottom:1px solid var(--line);white-space:nowrap}
+  td.name{text-align:left;padding-left:12px;font-weight:700}
+  td.num{font-family:"JetBrains Mono",monospace}
+  tbody tr:hover td{background:#f6f8fb}
+  .bx{display:inline-block;font-size:10.5px;padding:1px 6px;border-radius:3px;color:#fff;font-weight:500}
+  .bl{background:var(--badge-jp)} .bo{background:var(--badge-hk)}
+  .up{color:var(--up);font-weight:700} .dn{color:var(--dn);font-weight:700}
+  .fl{color:var(--fl);font-weight:700} .na{color:var(--muted)}
+  .note{font-size:11px;color:var(--muted);padding:6px 4px 0}
+
+  footer{font-size:11px;color:var(--muted);margin-top:22px;padding-top:12px;border-top:1px solid var(--line);line-height:1.7}
+
+  .toggle{display:none}
+  .hint{display:none;font-size:11px;color:var(--ink2);text-align:right;padding:4px 2px 0}
+
+  @media (max-width:720px){
+    body{padding:14px 10px}
+    header{flex-direction:column;align-items:flex-start}
+    header .date{text-align:left}
+    .kpi-row{grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:16px}
+    .kpi-card .value{font-size:17px}
+    .hint{display:block}
+    /* 手機：全欄位保留、整張表可左右滑動；代號與名稱固定 */
+    thead th,tbody td{font-size:12px;padding:7px 5px}
+    thead th:nth-child(1),tbody td:nth-child(1){position:sticky;left:0;z-index:2;min-width:44px;background:#fff}
+    thead th:nth-child(2),tbody td:nth-child(2){position:sticky;left:44px;z-index:2;min-width:70px;background:#fff;box-shadow:2px 0 3px rgba(0,0,0,.06)}
+    thead th:nth-child(1),thead th:nth-child(2){background:var(--thbg)}
+    td.name{padding-left:6px}
+  }
+  @media print{
+    body{padding:0}
+    .toggle,.hint{display:none!important}
+    thead th:nth-child(n),tbody td:nth-child(n){display:table-cell!important;position:static!important}
+    @page{size:A4;margin:10mm}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div>
+      <h1>日股觀光業看盤日報</h1>
+      <p class="sub">日本旅遊產業鏈上市公司＋港股概念股　收盤彙整</p>
+    </div>
+    <div class="date">2026年10月16日（星期五）<small>東京 15:30／香港 16:00 收盤</small></div>
+  </header>
+
+  <div class="kpi-row">
+    <div class="kpi-card"><div class="label">日經225指數</div><div class="value mono">65,324.29</div><div class="sub up">▲ 898.34（+1.39%）</div></div>
+    <div class="kpi-card"><div class="label">香港恒生指數</div><div class="value mono">24,186.83</div><div class="sub up">▲ 124.11（+0.52%）</div></div>
+    <div class="kpi-card"><div class="label">觀光股 上漲／下跌家數</div><div class="value"><span class="up">5</span> ／ <span class="dn">1</span></div><div class="sub" style="color:var(--ink2)">觀光6檔（途屹收黑）</div></div>
+    <div class="kpi-card"><div class="label">日股5檔成交額合計</div><div class="value mono">¥10.35 億</div><div class="sub" style="color:var(--ink2)">億日圓；途屹另計（港幣）</div></div>
+  </div>
+
+  <div class="highlights">
+    <h2>TODAY'S HIGHLIGHTS</h2>
+    <ul>
+      <li>大盤反彈、觀光股同步回升：日經 <b>+1.39%</b>（漲 898 點、收復昨跌約四分之一），觀光五檔市值加權 <b>+1.96%</b>、全數收紅，小幅領先大盤約 <b>+0.57 個百分點</b>。</li>
+      <li>漲幅最大：<b>AirTrip(6191) +4.21%</b>，收 ¥1,461 貼近日高，昨跌今強。</li>
+      <li>成交額最大：<b>AirTrip(6191) ¥5.01 億</b>，成交 34.3 萬股居日股之冠（HIS ¥4.77 億次之）。</li>
+      <li>跌幅最大：<em>途屹控股(1701) −3.08%</em>，為唯一收黑（港股），回吐前日部分漲幅；日股五檔全紅。</li>
+      <li>預估 PE 最低：<b>Hana Tour(6561) 7.09 倍</b>，估值相對偏低（HIS 本期預估轉虧、無有效 PE）。</li>
+      <li>家數：日股 5 檔 <b>全數上漲</b>；港股途屹控股 <em>下跌</em>。</li>
+    </ul>
+  </div>
+
+  <div class="group">
+    <div class="group-head"><span>日本旅遊鏈<span class="unit">單位：日圓</span></span><span class="badge">5 檔</span></div>
+    <div class="hint">← 可左右滑動 →</div>
+    <div class="tscroll"><table>
+      <thead><tr><th>代號</th><th>名稱</th><th>市場</th><th>成交量(股)</th><th>最高</th><th>最低</th><th>昨收</th><th>收盤</th><th>漲跌</th><th>漲幅%</th><th>預估PE</th><th>市值(億)</th><th>成交額(億)</th></tr></thead>
+      <tbody>
+        <tr><td class="num">9726</td><td class="name">KNT</td><td><span class="bx bl">東證S</span></td><td class="num">20,700</td><td class="num">2,028</td><td class="num">1,997</td><td class="num">1,980</td><td class="num">2,001</td><td class="num up">+21</td><td class="num up">+1.06%</td><td class="num">9.55</td><td class="num">546.89</td><td class="num">0.41</td></tr>
+        <tr><td class="num">6191</td><td class="name">AirTrip</td><td><span class="bx bl">東證P</span></td><td class="num">342,900</td><td class="num">1,466</td><td class="num">1,412</td><td class="num">1,402</td><td class="num">1,461</td><td class="num up">+59</td><td class="num up">+4.21%</td><td class="num">14.85</td><td class="num">332.70</td><td class="num">5.01</td></tr>
+        <tr><td class="num">9603</td><td class="name">HIS</td><td><span class="bx bl">東證P</span></td><td class="num">438,000</td><td class="num">1,096</td><td class="num">1,075</td><td class="num">1,068</td><td class="num">1,088</td><td class="num up">+20</td><td class="num up">+1.87%</td><td class="num na">—</td><td class="num">868.89</td><td class="num">4.77</td></tr>
+        <tr><td class="num">6561</td><td class="name">Hana Tour</td><td><span class="bx bl">東證G</span></td><td class="num">3,600</td><td class="num">814</td><td class="num">804</td><td class="num">804</td><td class="num">805</td><td class="num up">+1</td><td class="num up">+0.12%</td><td class="num">7.09</td><td class="num">101.95</td><td class="num">0.03</td></tr>
+        <tr><td class="num">7048</td><td class="name">VELTRA</td><td><span class="bx bl">東證G</span></td><td class="num">100,000</td><td class="num">138</td><td class="num">132</td><td class="num">133</td><td class="num">136</td><td class="num up">+3</td><td class="num up">+2.26%</td><td class="num">14.62</td><td class="num">49.78</td><td class="num">0.14</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="group">
+    <div class="group-head"><span>港股概念<span class="unit">單位：港幣</span></span><span class="badge">1 檔</span></div>
+    <div class="hint">← 可左右滑動 →</div>
+    <div class="tscroll"><table>
+      <thead><tr><th>代號</th><th>名稱</th><th>市場</th><th>成交量(股)</th><th>最高</th><th>最低</th><th>昨收</th><th>收盤</th><th>漲跌</th><th>漲幅%</th><th>預估PE</th><th>市值(億)</th><th>成交額(億)</th></tr></thead>
+      <tbody>
+        <tr><td class="num">1701</td><td class="name">途屹控股</td><td><span class="bx bo">港交所</span></td><td class="num">92,000</td><td class="num">0.063</td><td class="num">0.063</td><td class="num">0.065</td><td class="num">0.063</td><td class="num dn">−0.002</td><td class="num dn">−3.08%</td><td class="num">4.85</td><td class="num">0.63</td><td class="num">0.00</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note">※ 途屹控股為港元仙股、流動性極低（今日成交 9.2 萬股、周轉約 HK$0.6 萬），單日漲跌之價格訊號參考價值有限。</div>
+  </div>
+
+  <footer>
+    資料來源：Google Sheet「日本旅遊產業鏈上市公司股價資訊」（StockData、統計）／Yahoo Finance（約 20 分鐘延遲）；系統更新時間 2026-10-16 16:28。群組內依收盤價由高至低排序。<br>
+    預估PE 以各公司「会社予想」EPS 估算（已對照株探 kabutan、每季校正），僅供族群內相對比較、非精確估值；預估虧損者顯示「—」。成交額＝收盤×成交量。本報告僅供內部參考，不構成投資建議。
+  </footer>
+
+</div>
+</body>
+</html>
